@@ -1,4 +1,6 @@
-#' getxl
+# xl variable is module internal reactive that changes with input file
+xl<- reactiveValues(sheets=NULL, sheetdata=NULL)
+#' @title getxl
 #' @description Convert excel sheets to dataframes, display in DT, and return the dataframes
 #' @details This is a shiny module that presents a file picker UI to get an Excel file name, and reads the Excel sheets using readxl package and returns the resulting sheet(s) as a vector and data in dataframe(s). 
 #' @seealso See xlex for examples
@@ -7,14 +9,11 @@
 #' @param output is shiny output variable
 #' @param session is shiny session variable
 #' @rawNamespace import(shiny, except = c(renderDataTable, dataTableOutput))
-#' import(shinydashboard)
-#' import(DT)
-#' import(readxl)
-#'
-#' @export
-#'
+#' @import readxl
+#' @import DT
+#' @importFrom shinydashboard box
 # Server function getxl
-xl<- reactiveValues(sheets=NULL, sheetdata=NULL)
+#' @export
 	
 getxl<- function(input, output, session) {
 	ns<- session$ns
@@ -31,7 +30,6 @@ getxl<- function(input, output, session) {
 #' @description UI to get a excel file name
 #' @param id is the caller's id
 #' @export
-#'
 getxlUI<- function(id) {
 	ns<- NS(id)
 
@@ -56,7 +54,6 @@ getxlUI<- function(id) {
 #' @param input is shiny input variable
 #' @param output is shiny output variable
 #' @param session is shiny session variable
-#'
 xldisp<- function(input, output, session, xlfile, skiprows) {
 	sheets<- excel_sheets(xlfile)
 	sheetdata<- list()
@@ -80,7 +77,6 @@ xldisp<- function(input, output, session, xlfile, skiprows) {
 #' @description UI to display excel sheets read as individual data tables
 #' @param id is caller's id
 #' @param xlfile is the name of the xl file being got
-#'
 xldispUI<- function(id, xlfile) {
 	ns<- NS(id)
 

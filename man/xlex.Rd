@@ -7,7 +7,8 @@
 use shiny module getxl/UI for interactive input of Excel files
 }
 \examples{
-library(modgetxl) # depends and loads shiny, shinydashboard, readxl, DT
+library(shiny)
+library(modgetxl)
 app<- shinyApp(  
  ui= uiOutput('xltest'),
  
